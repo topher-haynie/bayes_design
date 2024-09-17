@@ -4,6 +4,7 @@ from torch import nn
 import numpy as np
 import torch
 from transformers import XLNetTokenizer, XLNetLMHeadModel
+from importlib import resources
 from .protein_mpnn.protein_mpnn_utils import ProteinMPNN
 
 from .utils import AMINO_ACID_ORDER
@@ -167,11 +168,12 @@ class ProteinMPNNWrapper(nn.Module):
             self.device = torch.device('cpu')
 
         backbone_noise=0.00               # Standard deviation of Gaussian noise to add to backbone atoms
-        #v_48_030=version with 48 edges 0.30A noise
-        checkpoint_path ='./bayes_design/protein_mpnn/vanilla_model_weights/v_48_030.pt'
         hidden_dim = 128
         num_layers = 3
-        checkpoint = torch.load(checkpoint_path, map_location=self.device) 
+        # Assuming the file is in the 'protein_mpnn/vanilla_model_weights' directory inside the package
+        with resources.path('bayes_design.protein_mpnn.vanilla_model_weights', 'v_48_030.pt') as checkpoint_path:
+            checkpoint = torch.load(checkpoint_path, map_location=self.device)
+            
         print('Number of edges:', checkpoint['num_edges'])
         noise_level_print = checkpoint['noise_level']
         print(f'Training noise level: {noise_level_print}')
