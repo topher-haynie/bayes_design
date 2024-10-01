@@ -181,7 +181,7 @@ class ProteinMPNNWrapper(nn.Module):
         checkpoint_path ='./bayes_design/protein_mpnn/vanilla_model_weights/v_48_030.pt'
         hidden_dim = 128
         num_layers = 3
-        checkpoint = torch.load(checkpoint_path, map_location=self.device) 
+        checkpoint = torch.load(checkpoint_path, map_location=self.device, weights_only=True) 
         print('Number of edges:', checkpoint['num_edges'])
         noise_level_print = checkpoint['noise_level']
         print(f'Training noise level: {noise_level_print}')
