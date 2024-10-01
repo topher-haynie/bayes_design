@@ -211,8 +211,6 @@ class ProteinMPNNWrapper(nn.Module):
 
         N = len(token_to_decode)
         L = len(seq[0])
-        print("N: ", N, "L: ", L)
-        print("Structure shape:", struct.shape[0])
         assert L == struct.shape[0], "Sequence length must match the number of residues in the provided structure"
 
         # Convert amino acid character to index

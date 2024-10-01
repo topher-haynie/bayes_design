@@ -167,7 +167,7 @@ def main(args):
     else:
         dataset_valid = StructureDataset(args.jsonl_path, truncate=None, max_length=args.max_length, verbose=print_all)
 
-    checkpoint = torch.load(checkpoint_path, map_location=device) 
+    checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=True) 
     noise_level_print = checkpoint['noise_level']
     model = ProteinMPNN(ca_only=args.ca_only, num_letters=21, node_features=hidden_dim, edge_features=hidden_dim, hidden_dim=hidden_dim, num_encoder_layers=num_layers, num_decoder_layers=num_layers, augment_eps=args.backbone_noise, k_neighbors=checkpoint['num_edges'])
     model.to(device)
