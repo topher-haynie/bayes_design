@@ -95,8 +95,8 @@ def example_design(args):
 
     # Get sequence and structure of protein to redesign
     protein_seq, struct = get_protein(args.protein_id)
-    if args.sequences_path:
-        with open(args.sequences_path) as f:
+    if args.sequence_path:
+        with open(args.sequence_path) as f:
             # remove header line that starts with ">"
             lines = [x.strip() for x in f.readlines() if x[0] != ">"]
         seq = "".join(lines)
