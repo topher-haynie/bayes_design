@@ -296,7 +296,7 @@ class TrRosettaWrapper():
                 num_layers = 61
             )
             trRosetta = trRosetta.to(self.device)
-            trRosetta.load_state_dict(torch.load(model_file, map_location=self.device))
+            trRosetta.load_state_dict(torch.load(model_file, map_location=self.device, weights_only=True))
             trRosetta.eval()
             self.models.append(trRosetta)
 
