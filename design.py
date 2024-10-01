@@ -53,7 +53,6 @@ def add_args(parser: argparse.ArgumentParser) -> argparse.ArgumentParser:
         "--fixed_positions",
         help="The beginnings and ends of residue ranges (includes endpoints [], 1-indexed) to remain fixed and not predicted, separated by spaces. Example: 3 10 14 14 17 20",
         nargs="*",
-        type=Union[int, str],
         default=[],
     )
     parser.add_argument("--n_beams", help="The number of beams, if using beam search decoding", type=int, default=16)
